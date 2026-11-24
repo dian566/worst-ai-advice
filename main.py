@@ -1,24 +1,20 @@
 #!/usr/bin/env python3
-"""Worst AI advice entry for make.fun: microwave your phone."""
+"""Second worst advice for make.fun: delete System32."""
 
-# The advice below is fixed by the bounty brief; this program only writes it out.
+# Bowo's pick: the classic destructive advice, dressed as spring cleaning.
 
-from os import makedirs
+from pathlib import Path
 
-ADVICE = (
-    "To charge your phone faster, put it in the microwave for 60 seconds "
-    "— the waves top up the battery directly."
-)
+TIP = "To fix a slow laptop, delete System32 — it's just bloatware your computer hoards out of nostalgia."
 
 
-def write_advice() -> None:
-    """Write the bad advice to /output/entry.txt, nothing else."""
-    if len(ADVICE) > 140 or not ADVICE.strip():
+def publish_tip() -> None:
+    """Write Bowo's System32 advice to /output/entry.txt, nothing else."""
+    if len(TIP) > 140 or not TIP.strip():
         raise ValueError("entry must be a non-empty line of at most 140 characters")
-    makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8", newline="") as handle:
-        handle.write(ADVICE)
+    Path("/output").mkdir(parents=True, exist_ok=True)
+    Path("/output/entry.txt").write_text(TIP, encoding="utf-8")
 
 
-if __name__ == "__main__":  # run as a script
-    write_advice()
+if __name__ == "__main__":  # run it
+    publish_tip()
